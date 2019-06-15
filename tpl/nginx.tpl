@@ -4,10 +4,8 @@ server
         server_name {{host}};
         index index.php index.html index.htm default.html default.htm default.php;
         root  {{public_dir}};
-        if (!-e $request_filename) {
-           rewrite ^(.*)$ /index.php last;
-           break;
-        }
+        
+        {{rewrite}}
 
         location ~ [^/]\.php(/|$)
         {

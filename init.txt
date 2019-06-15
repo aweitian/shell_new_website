@@ -1,0 +1,53 @@
+rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+yum install -y nginx
+service nginx start
+
+yum install -y mariadb mariadb-server
+systemctl start mariadb
+systemctl enable mariadb
+mysqladmin -u root password 'root'
+
+yum install -y php
+
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php --filename=composer
+mv composer /bin
+php -r "unlink('composer-setup.php');"
+
+yum install -y php-fpm
+service php-fpm start
+
+
+#ftp
+yum install pure-ftpd -y
+
+vi /etc/pure-ftpd/pure-ftpd.conf
+##################################
+###去掉#注释，指定路径，PureDB用户数据库文件
+# PureDB /etc/pure-ftpd/pureftpd.pdb
+
+###开启日志 /var/log/pureftpd.log
+# VerboseLog yes
+
+###拒绝匿名用户登录
+# NoAnonymous yes
+
+###使用被动模式，并限制端口范围
+# PassivePortRange 48000 50000
+##########################################
+
+groupadd ftpgroup
+useradd -g ftpgroup -s /sbin/nologin -d /dev/null ftpuser
+pure-pw useradd 用户名 -u ftpuser -d /目录路径/ -m
+
+chkconfig pure-ftpd --level 345 on
+/etc/init.d/pure-ftpd start 
+#OR
+systemctl restart pure-ftpd.service
+
+
+
+
+
+
