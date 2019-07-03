@@ -7,7 +7,7 @@ cd {{repository_dir}}
 git init --bare {{domain}}.git
 cd {{domain}}.git
 cd hooks
-cat tmp/hook > post-receive
+cat {{workspace_dir}}/tmp/hook > post-receive
 chmod +x post-receive
 cd {{repository_dir}}
 chown -R git {{domain}}.git
