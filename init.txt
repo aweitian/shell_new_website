@@ -12,7 +12,7 @@ systemctl start mariadb
 systemctl enable mariadb
 mysqladmin -u root password 'root'
 
-yum install -y php
+yum install -y php php-gd php-mysql php-mbstring php-curl
 
 
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
