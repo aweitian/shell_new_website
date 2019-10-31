@@ -24,6 +24,15 @@ yum install -y php-fpm
 service php-fpm start
 
 
+
+systemctl enable nginx
+systemctl enable php-fpm
+systemctl enable mariadb
+
+
+
+
+
 #ftp
 yum install pure-ftpd -y
 
