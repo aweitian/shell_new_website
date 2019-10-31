@@ -1,0 +1,50 @@
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.php index.html index.htm;
+        if (!-e $request_filename) {
+                rewrite ^(.*)$ / last;
+                break;
+        }
+    }
+
+    location /s2 {
+        root   /usr/share/nginx/html;
+        index  index.php index.html index.htm;
+        if (!-e $request_filename) {
+                rewrite ^/s2/(.*)$ /s2/index.php last;
+                break;
+        }
+    }
+
+
+if指令
+语法：if(condition){...}
+默认值：无
+作用域：server,location
+对给定的条件condition进行判断。如果为真，大括号内的rewrite指令将被执行。
+if条件(conditon)可以是如下任何内容:
+
+一个变量名；false如果这个变量是空字符串或者以0开始的字符串；
+使用= ,!= 比较的一个变量和字符串
+是用~， ~*与正则表达式匹配的变量，如果这个正则表达式中包含}，;则整个表达式需要用" 或' 包围
+使用-f ，!-f 检查一个文件是否存在
+使用-d, !-d 检查一个目录是否存在
+使用-e ，!-e 检查一个文件、目录、符号链接是否存在
+使用-x ， !-x 检查一个文件是否可执行
+
+
+
+
+rewrite指令
+语法：rewrite regex replacement [flag];
+默认值：无
+作用域：server,location,if
+如果一个URI匹配指定的正则表达式regex，URI就按照replacement重写。
+rewrite按配置文件中出现的顺序执行。flags标志可以停止继续处理。
+如果replacement以"http://"或"https://"开始，将不再继续处理，这个重定向将返回给客户端。
+flag可以是如下参数
+last 停止处理后续rewrite指令集，然后对当前重写的新URI在rewrite指令集上重新查找。
+break 停止处理后续rewrite指令集，并不在重新查找,但是当前location内剩余非rewrite语句和location外的的非rewrite语句可以执行。
+redirect 如果replacement不是以http:// 或https://开始，返回302临时重定向
+permant 返回301永久重定向
+最终完整的重定向URL包括请求scheme(http://,https://等),请求的server_name_in_redirect和 port_in_redirec三部分 ，说白了也就是http协议 域名 端口三部分组成。
