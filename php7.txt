@@ -1,0 +1,60 @@
+安装php
+====================================================
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+
+
+
+yum install php71w php71w-fpm php71w-cli php71w-common php71w-devel php71w-gd php71w-pdo php71w-mysql php71w-mbstring php71w-bcmath
+
+安装redis
+====================================================
+yum install redis
+//修改配置 
+vi /etc/redis.conf
+//daemonize yes 后台运行
+//appendonly yes 数据持久化
+
+安装php-redis扩展
+====================================================
+//先装git
+yum install git
+
+//git下扩展
+cd /usr/local/src
+git clone https://github.com/phpredis/phpredis.git
+
+//安装扩展
+cd phpredis
+phpize
+
+//修改php配置
+cd /etc/php.d/
+ 添加extension=redis.so
+
+
+安装MYSQL(待检验)
+====================================================
+yum localinstall http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm
+
+yum install mysql-community-server
+
+//开启mysql
+service mysqld start
+
+//查看mysql的root账号的密码
+grep 'temporary password' /var/log/mysqld.log
+
+//登录mysql
+mysql -uroot -p
+
+//修改密码
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
+
+//修改root用户可远程登录
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION; 
+
+//刷新
+flush privileges;
+
+
