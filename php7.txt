@@ -5,32 +5,35 @@ rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 
 
 
-yum install php71w php71w-fpm php71w-cli php71w-common php71w-devel php71w-gd php71w-pdo php71w-mysql php71w-mbstring php71w-bcmath
+yum install php72w php72w-fpm php72w-cli php72w-common php72w-devel php72w-gd php72w-pdo php72w-mysql php72w-mbstring php72w-bcmath
 
 安装redis
 ====================================================
 yum install redis
-//修改配置 
-vi /etc/redis.conf
-//daemonize yes 后台运行
-//appendonly yes 数据持久化
-
-安装php-redis扩展
-====================================================
-//先装git
-yum install git
-
-//git下扩展
-cd /usr/local/src
-git clone https://github.com/phpredis/phpredis.git
-
-//安装扩展
-cd phpredis
-phpize
-
-//修改php配置
-cd /etc/php.d/
- 添加extension=redis.so
+yum -y install php72w-pecl-redis
+废弃:
+--------------
+#//修改配置 
+#vi /etc/redis.conf
+#//daemonize yes 后台运行
+#//appendonly yes 数据持久化
+#
+#安装php-redis扩展
+#====================================================
+#//先装git
+#yum install git
+#
+#//git下扩展
+#cd /usr/local/src
+#git clone https://github.com/phpredis/phpredis.git
+#
+#//安装扩展
+#cd phpredis
+#phpize
+#
+#//修改php配置
+#cd /etc/php.d/
+# 添加extension=redis.so
 
 
 安装MYSQL(待检验)
