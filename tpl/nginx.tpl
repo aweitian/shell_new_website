@@ -26,6 +26,6 @@ server
             expires      12h;
         }
 
-        #access_log  /home/wwwlogs/3g.gene.sh9l.cn.log  access;
+        #access_log  /home/wwwlogs/access.log  access;
     }
 
