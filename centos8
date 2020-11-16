@@ -1,6 +1,16 @@
-yum install php //php72
+#default ver is 7.2
+yum install php
+
 yum install nginx
-yum install mysql-server //default passwd is ''
+systemctl enable nginx
+systemctl start nginx
+
+#default passwd is ''
+yum install mysql-server
 systemctl start mysqld
+systemctl enable mysqld
+
+
 yum install redis
 systemctl start redis
+systemctl enable redis
