@@ -1,0 +1,4 @@
+yum install php //php72
+yum install nginx
+yum install mysql-server //default passwd is ''
+yum install redis
