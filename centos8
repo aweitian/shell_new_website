@@ -10,6 +10,8 @@ yum install mysql-server
 systemctl start mysqld
 systemctl enable mysqld
 
+#reset pwd
+mysqladmin -uroot -p password 'root'
 
 yum install redis
 systemctl start redis
